@@ -8,7 +8,11 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import vueResource from 'vue-resource'
+
 Vue.use(BootstrapVue)
+
+Vue.use(vueResource)
 
 Vue.config.productionTip = false
 

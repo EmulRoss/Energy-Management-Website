@@ -79,6 +79,18 @@ export default {
           borderWidth: 1 }] },
       options: { scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }})
     // myChart.data =
+  },
+  GETData () {
+    // GET /someUrl
+    this.$http.get('/127.0.0.1:5000/').then(response => {
+
+      // get body data
+      console.log(response)
+      //this.someData = response.body;
+
+    }, response => {
+      // error callback
+    });
   }
 }
 </script>
