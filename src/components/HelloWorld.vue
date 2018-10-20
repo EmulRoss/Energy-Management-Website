@@ -13,6 +13,8 @@
 <script>
 import L from 'leaflet'
 import Chart from 'chart.js'
+import Vue from 'vue'
+Vue.use(require('vue-resource'))
 /* export default {
   name: 'HelloWorld',
   data () {
@@ -21,8 +23,32 @@ import Chart from 'chart.js'
     }
   }
 } */
+
+    var polygon = L.polygon([
+      [-26.18887, 28.02767],
+      [-26.18777, 28.02857],
+      [-26.18667, 28.02547]
+    ])
+var someData = "Hello"
+var onPolyClick = 
+	function(event){
+	 // GET /someUrl
+	    Vue.http.get('http://127.0.0.1:5000/').then(response => {
+
+	      // get body data
+		console.log("Hello")
+	        console.log(someData)
+	        someData = response.bodyText;
+		console.log(someData)
+		polygon.bindPopup(someData)
+	    }, response => {
+	      // error callback
+	    });
+}
 export default {
   mounted () {
+	/*
+	}*/
     var map = L.map(this.$refs['mapElement']).setView([-26.18887, 28.02767], 17)
     map.dragging.disable()
     map.touchZoom.disable()
@@ -32,16 +58,16 @@ export default {
     map.zoomControl.remove()
     map.keyboard.disable()
 
-    var polygon = L.polygon([
-      [-26.18887, 28.02767],
-      [-26.18777, 28.02857],
-      [-26.18667, 28.02547]
-    ]).addTo(map)
-
+    polygon.on('click', onPolyClick)
+    polygon.addTo(map)
+    //polygon.bindPopup(someData)
+	
     /* polygon.setStyle({
       color: 'blue'
     }) */
-    polygon.bindPopup('I am a polygon.')
+
+
+    //polygon.bindPopup(this.someData)
 
     map.createPane('labels')
     map.getPane('labels').style.zIndex = 650
@@ -79,19 +105,8 @@ export default {
           borderWidth: 1 }] },
       options: { scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }})
     // myChart.data =
-  },
-  GETData () {
-    // GET /someUrl
-    this.$http.get('/127.0.0.1:5000/').then(response => {
-
-      // get body data
-      console.log(response)
-      //this.someData = response.body;
-
-    }, response => {
-      // error callback
-    });
   }
+   
 }
 </script>
 
