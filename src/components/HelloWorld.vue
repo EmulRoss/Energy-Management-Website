@@ -1,11 +1,11 @@
 <template>
   <div class="content">
     <div class="sidepanel">
-      <h1>Building Name{{ msg }}</h1>
+      <h1 id="h101">No Selection</h1>
       <br>
       <br>
-      <canvas id="myChart"></canvas>
-      <canvas id="PieChart"></canvas>
+      <canvas id="myChart" style="visibility:hidden"></canvas>
+      <canvas id="PieChart" style="visibility:hidden"></canvas>
     </div>
     <div id="map" ref="mapElement">
     </div>
@@ -26,12 +26,6 @@ Vue.use(require("vue-resource"));
   }
 } */
 
-var polygon = L.polygon([
-  [-26.18887, 28.02767],
-  [-26.18777, 28.02857],
-  [-26.18667, 28.02547]
-]);
-var someData = "Hello";
 var onPolyClick = function(event) {
   // GET /someUrl
   Vue.http.get("http://127.0.0.1:5000/").then(
@@ -48,16 +42,17 @@ var onPolyClick = function(event) {
     }
   );
 };
+
 var geojsonFeature = {
   type: "FeatureCollection",
   features: [
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "The Chamber of Mines Building",
+        popupContent: "The Chamber of Mines Building",
+        id: 0,
+        styleid: 1
       },
       geometry: {
         type: "Polygon",
@@ -79,10 +74,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Flower Hall",
+        popupContent: "Flower Hall - No Data",
+        id: 1,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -100,10 +95,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "High Voltage Laboratory",
+        popupContent: "High Voltage Laboratory - No Data",
+        id: 2,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -121,10 +116,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Genmin Laboratories",
+        popupContent: "Genmin Laboratories - No Data",
+        id: 3,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -148,10 +143,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Wits Science Stadium",
+        popupContent: "Wits Science Stadium",
+        id: 4,
+        styleid: 2
       },
       geometry: {
         type: "Polygon",
@@ -189,10 +184,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "TW Mathematical Sciences Building",
+        popupContent: "TW Mathematical Sciences Building - No Data",
+        id: 5,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -216,33 +211,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.027496337890625, -26.190380798017202],
-            [28.027716279029843, -26.19026526996308],
-            [28.027667999267578, -26.190212319566662],
-            [28.02760362625122, -26.19018825119669],
-            [28.027523159980774, -26.190202692219263],
-            [28.027469515800473, -26.190279710976114],
-            [28.027496337890625, -26.190380798017202]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Wits Plus",
+        popupContent: "Wits Plus - No Data",
+        id: 6,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -262,10 +234,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Counselling Careers and Development Unit",
+        popupContent: "Counselling Careers and Development Unit - No Data",
+        id: 7,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -289,10 +261,44 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "FNB",
+        popupContent: "FNB",
+        id: 8,
+        styleid: 3
+      },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [28.025903105735775, -26.188378295527585],
+            [28.025962114334106, -26.18885485573159],
+            [28.02616596221924, -26.18883560081165],
+            [28.026257157325745, -26.188955944009102],
+            [28.026471734046936, -26.188994453806025],
+            [28.02663266658783, -26.18889336556195],
+            [28.026675581932068, -26.188792277230128],
+            [28.02686870098114, -26.18875376736638],
+            [28.02680432796478, -26.188267579241515],
+            [28.02663266658783, -26.188291648008306],
+            [28.026648759841915, -26.188407178019677],
+            [28.026450276374817, -26.188431246757627],
+            [28.026428818702698, -26.188262765487565],
+            [28.026273250579834, -26.188277206748833],
+            [28.026294708251953, -26.1884505017444],
+            [28.02607476711273, -26.188469756728004],
+            [28.026058673858643, -26.188359040528866],
+            [28.025903105735775, -26.188378295527585]
+          ]
+        ]
+      }
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "New Commerce Building",
+        popupContent: "New Commerce Building - No Data",
+        id: 9,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -326,175 +332,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.02563488483429, -26.189971635643204],
-            [28.025656342506405, -26.19012085973433],
-            [28.02616059780121, -26.19005828191293],
-            [28.02613377571106, -26.189909057741644],
-            [28.02563488483429, -26.189971635643204]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.02589237689972, -26.189552844430967],
-            [28.025811910629272, -26.189605795127147],
-            [28.025795817375183, -26.18968281427864],
-            [28.02584946155548, -26.189745392301724],
-            [28.025940656661987, -26.18976946076319],
-            [28.026021122932434, -26.189711696447308],
-            [28.026042580604553, -26.18962986361746],
-            [28.025988936424252, -26.189567285532306],
-            [28.02589237689972, -26.189552844430967]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.025903105735775, -26.188378295527585],
-            [28.025962114334106, -26.18885485573159],
-            [28.02616596221924, -26.18883560081165],
-            [28.026257157325745, -26.188955944009102],
-            [28.026471734046936, -26.188994453806025],
-            [28.02663266658783, -26.18889336556195],
-            [28.026675581932068, -26.188792277230128],
-            [28.02686870098114, -26.18875376736638],
-            [28.02680432796478, -26.188267579241515],
-            [28.02663266658783, -26.188291648008306],
-            [28.026648759841915, -26.188407178019677],
-            [28.026450276374817, -26.188431246757627],
-            [28.026428818702698, -26.188262765487565],
-            [28.026273250579834, -26.188277206748833],
-            [28.026294708251953, -26.1884505017444],
-            [28.02607476711273, -26.188469756728004],
-            [28.026058673858643, -26.188359040528866],
-            [28.025903105735775, -26.188378295527585]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.02490532398224, -26.18915812030096],
-            [28.025017976760864, -26.18914849286645],
-            [28.025017976760864, -26.189119610558134],
-            [28.025195002555847, -26.189085914522718],
-            [28.02515208721161, -26.18878264976538],
-            [28.025275468826294, -26.18876820856678],
-            [28.025280833244324, -26.18879709096221],
-            [28.0253666639328, -26.18880190469409],
-            [28.02559733390808, -26.189042591034298],
-            [28.02574217319488, -26.188758581100036],
-            [28.025720715522766, -26.188585286562738],
-            [28.025468587875366, -26.188609355263896],
-            [28.025436401367188, -26.188532335402705],
-            [28.02537739276886, -26.188498639197437],
-            [28.025313019752502, -26.188479384218603],
-            [28.025318384170532, -26.18842643301043],
-            [28.02489459514618, -26.188306089266],
-            [28.024824857711792, -26.188537149145525],
-            [28.024835586547848, -26.188671933863613],
-            [28.02490532398224, -26.188691188810616],
-            [28.024932146072388, -26.188955944009102],
-            [28.02487850189209, -26.188960757734414],
-            [28.02490532398224, -26.18915812030096]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.024964332580566, -26.189312159144958],
-            [28.0250072479248, -26.189600981428487],
-            [28.025790452957153, -26.189495080007667],
-            [28.025752902030945, -26.189220698605904],
-            [28.025484681129456, -26.189254394602337],
-            [28.025473952293396, -26.189206257461592],
-            [28.025232553482056, -26.189235139748423],
-            [28.02524864673614, -26.189273649453057],
-            [28.024964332580566, -26.189312159144958]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.025951385498047, -26.18925920831531],
-            [28.025988936424252, -26.18947101148952],
-            [28.026949167251587, -26.18936029624194],
-            [28.026922345161438, -26.18914849286645],
-            [28.025951385498047, -26.18925920831531]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "PIMD",
+        popupContent: "PIMD - No Data",
+        id: 10,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -512,10 +353,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "DJ Du Plesis",
+        popupContent: "DJ Du Plesis - No Data",
+        id: 11,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -536,10 +377,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "West Campus Village",
+        popupContent: "West Campus Village - No Data",
+        id: 12,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -557,10 +398,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Convocation Dining Hall",
+        popupContent: "Convocation Dining Hall - No Data",
+        id: 13,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -580,10 +421,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Barnato Hall",
+        popupContent: "Barnato Hall - No Data",
+        id: 14,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -605,10 +446,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Webster Hall",
+        popupContent: "Webster Hall - No Data",
+        id: 15,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -626,10 +467,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Hall 29",
+        popupContent: "Hall 29 - No Data",
+        id: 16,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -647,10 +488,33 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Olives and Plates",
+        popupContent: "Olives and Plates - No Data",
+        id: 17,
+        styleid: 0
+      },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [28.02557051181793, -26.18572588948133],
+            [28.025704622268677, -26.185889560568008],
+            [28.026026487350464, -26.18570182018448],
+            [28.025956749916077, -26.185629612264123],
+            [28.02588701248169, -26.185697006324528],
+            [28.025795817375183, -26.18560072908344],
+            [28.02557051181793, -26.18572588948133]
+          ]
+        ]
+      }
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "The Barns",
+        popupContent: "The Barns - No Data",
+        id: 18,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -672,33 +536,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.02557051181793, -26.18572588948133],
-            [28.025704622268677, -26.185889560568008],
-            [28.026026487350464, -26.18570182018448],
-            [28.025956749916077, -26.185629612264123],
-            [28.02588701248169, -26.185697006324528],
-            [28.025795817375183, -26.18560072908344],
-            [28.02557051181793, -26.18572588948133]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Johannesburg Planetarium",
+        popupContent: "Johannesburg Planetarium - No Data",
+        id: 19,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -731,10 +572,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "William Cullen Library",
+        popupContent: "William Cullen Library - No Data",
+        id: 20,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -752,10 +593,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Wartenweilier Library",
+        popupContent: "Wartenweilier Library - No Data",
+        id: 21,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -773,10 +614,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Origins Centre",
+        popupContent: "Origins Centre - No Data",
+        id: 22,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -800,10 +641,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Senate House",
+        popupContent: "Senate House - No Data",
+        id: 23,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -837,31 +678,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
-      },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [28.03089201450348, -26.19197411074337],
-            [28.030940294265747, -26.192296621543303],
-            [28.03158938884735, -26.19221479052936],
-            [28.031541109085083, -26.191897093106828],
-            [28.03089201450348, -26.19197411074337]
-          ]
-        ]
-      }
-    },
-    {
-      type: "Feature",
-      properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Physics Building",
+        popupContent: "Physics Building - No Data",
+        id: 24,
+        styleid: 0
       },
       geometry: {
         type: "Polygon",
@@ -879,10 +699,10 @@ var geojsonFeature = {
     {
       type: "Feature",
       properties: {
-        name: "Some Building",
-        amenity: "This thing",
-        popupContent: "Event data",
-        id: 1
+        name: "Great Hall",
+        popupContent: "Great Hall",
+        id: 25,
+        styleid: 4
       },
       geometry: {
         type: "Polygon",
@@ -915,17 +735,29 @@ export default {
     map.zoomControl.remove();
     map.keyboard.disable();
 
-    polygon.on("click", onPolyClick);
-    polygon.addTo(map);
-
     var myStyle = [
+      {
+        color: "#555555",
+        weight: 5,
+        opacity: 0.65
+      },
       {
         color: "#ff7800",
         weight: 5,
         opacity: 0.65
       },
       {
+        color: "#ff0000",
+        weight: 5,
+        opacity: 0.65
+      },
+      {
         color: "#0000ff",
+        weight: 5,
+        opacity: 0.65
+      },
+      {
+        color: "#ff00ff",
         weight: 5,
         opacity: 0.65
       }
@@ -937,7 +769,22 @@ export default {
         // does this feature have a property named popupContent?
         if (feature.properties && feature.properties.popupContent) {
           layer.bindPopup(feature.properties.popupContent);
-          layer.setStyle(myStyle[feature.properties.id]);
+          layer.on("click", function(event) {
+            // GET /someUrl
+            //var CurrentID = arguments
+            if (feature.properties.styleid == 0) {
+              document.getElementById("h101").innerHTML =
+                feature.properties.popupContent;
+              document.getElementById("myChart").style.visibility = "hidden";
+              document.getElementById("PieChart").style.visibility = "hidden";
+            } else {
+              document.getElementById("h101").innerHTML =
+                feature.properties.name;
+              document.getElementById("myChart").style.visibility = "visible";
+              document.getElementById("PieChart").style.visibility = "visible";
+            }
+          });
+          layer.setStyle(myStyle[feature.properties.styleid]);
         }
       }
     }).addTo(map);
