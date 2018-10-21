@@ -4,6 +4,7 @@
       <h1>{{ msg }}</h1>
       <h2>This is a test</h2>
       <canvas id="myChart"></canvas>
+      <canvas id="PieChart"></canvas>
     </div>
     <div id="map" ref="mapElement">
     </div>
@@ -86,25 +87,74 @@ export default {
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['1900', '1950', '2000', '2050'],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [ 'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)' ],
-          borderColor: [ 'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)' ],
-          borderWidth: 1 }] },
-      options: { scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }})
-    // myChart.data =
+          label: 'Current Consumption',
+	  type: 'line',
+	  borderColor: 'rgba(255, 99, 132, 1)',
+          data: [12, 19, 3, 5],
+	  fill: false
+	}, {
+	  label: 'Average Consumption',
+	  type: 'line',
+	  borderColor: 'rgba(75, 192, 192, 1)',
+	  data: [11, 12, 13, 14],
+	  fill: false
+	}, {
+	  label: 'Grid',
+	  type: 'bar',
+	  yAxisID: 'bar-stacked',
+          backgroundColor: 'rgba(153, 102, 255, 1)',
+	  data: [12, 19, 3, 5],
+	}, {
+	  label: 'Solar',
+	  type: 'bar',
+	  yAxisID: 'bar-stacked',
+	  backgroundColor: 'rgba(255, 206, 86, 1)',
+	  data: [7, 12, 1, 2]
+	}]
+     },
+     options: {
+	scales: {
+		xAxes: [{ stacked: true}],
+		yAxes: [{ stacked: false,
+			ticks: { beginAtZero: true, min: 0, max: 20}},{
+			id: 'bar-stacked',
+			stacked: true,
+			display: false,
+			ticks: { beginAtZero: true, min: 0, max: 20}}]
+	},
+	title: {
+		display: true,
+		text: 'Load Profile of Building'
+	},
+	ticks: {
+		beginAtZero: true,
+		min: 0,
+		max: 20
+	},
+	}
+     })
+
+	var ctx = document.getElementById('PieChart').getContext('2d')
+    	var PieChart = new Chart(ctx, {
+		type: 'pie',
+		data: {
+			labels: ['Grid','Solar'],
+			datasets: [{
+				label: 'Percentage Supply',
+				backgroundColor: ['rgba(153, 102, 255, 1)','rgba(255, 206, 86, 1)'],
+				data: [2000,200]
+			}]
+
+		},
+		options: {
+			title: {
+				display: true,
+				text: 'Comparison of energy supply'
+			}
+		}
+	})
   }
    
 }
