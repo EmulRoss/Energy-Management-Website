@@ -271,7 +271,7 @@ export default {
       //propertyValue = featureLayer.feature.properties["Event data"]
       //var myFillColor =
       //featureLayer.setStyle(featureLayer.feature.properties.style)
-    });
+    })
 
     //polygon.bindPopup(someData)
 
